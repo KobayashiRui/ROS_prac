@@ -13,18 +13,27 @@ using namespace std::chrono_literals;
 
 int main(int argc, char * argv[])
 {
-  rclcpp::init(argc, argv);
+  //rclcpp::init(argc, argv);
+  int a=0;
+  char** b=NULL;
+  rclcpp::init(a, b);
+  for(int i=0; i < 100; i++){
   auto pub_node = rclcpp::Node::make_shared("minimal_publisher");
+  //std::shared_ptr<rclcpp::Node> pub_node = rclcpp::Node::make_shared("minimal_publisher");
+
   auto publisher = pub_node->create_publisher<std_msgs::msg::String>("topic",10);
-  //auto message = std::make_shared<std_msgs::msg::String>();
+  //std::shared_ptr<rclcpp::Publisher<std_msgs::msg::String_<std::allocator<void> > > >publisher = pub_node->create_publisher<std_msgs::msg::String>("topic",10);
   auto message = std_msgs::msg::String();
   message.data = "Hello, world";
-  rclcpp::WallRate rate(20ms);
+  rclcpp::WallRate rate(200ms);
   
   //通信が確立するまでの何回かは送信失敗(受信されないだけ)するので注意
   //受信側が受け取らない個数はWallRateの時間設定による(早いほど多くなる)
-  for(int i=0; i < 100; i++){
-    rate.sleep();
+    //rate.sleep();
+    for(int j=0; j < 1000000; j++){
+    for(int k=0; k < 100; k++){
+    }
+    }
     message.data ="Hello, world" + std::to_string(i);
     RCLCPP_INFO(pub_node->get_logger(),"Publishing: %s",message.data.c_str());
     rclcpp::spin_some(pub_node);

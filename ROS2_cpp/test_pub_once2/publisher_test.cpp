@@ -40,12 +40,13 @@ int main(int argc, char * argv[])
 {
   rclcpp::WallRate rate(1s);
   rclcpp::init(argc, argv);
-  rclcpp::executors::SingleThreadedExecutor exec;
+  //rclcpp::executors::SingleThreadedExecutor exec;
+  rclcpp::executors::MultiThreadedExecutor exec;
   auto pub_node = std::make_shared<MinimalPublisher>(10);
   exec.add_node(pub_node);
-  for(int i=0; i < 5; i++){
-    rate.sleep();
-    exec.spin_once();
+  exec.spin();
+  for(int i=0; i < 100; i++){
+    std::cout << "hoge\n";
   }
 
   rclcpp::shutdown();

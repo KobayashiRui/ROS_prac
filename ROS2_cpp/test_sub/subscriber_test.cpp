@@ -28,6 +28,9 @@ private:
 
 int main(int argc, char * argv[])
 {
+ // int a =0;
+ // char**b = NULL;
+ // rclcpp::init(a,b);
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<MinimalSubscriber>());
   rclcpp::shutdown();
