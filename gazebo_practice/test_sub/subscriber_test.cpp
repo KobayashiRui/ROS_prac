@@ -8,7 +8,7 @@ class MinimalSubscriber : public rclcpp::Node
 {
 public:
   MinimalSubscriber()
-  : Node("minimal_subscriber")
+  : Node("minimal_subst(criber")
   {
 
     auto subscription_func = 
@@ -17,7 +17,7 @@ public:
         };
 
     subscription_ = this->create_subscription<std_msgs::msg::String>(
-      "/demo/topic",
+      "topic",
       rclcpp::QoS(rclcpp::KeepLast(1)),
       subscription_func);
   }

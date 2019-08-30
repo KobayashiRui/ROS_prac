@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_
-#define GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_
+//#ifndef GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_
+//#define GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_
 
 #include <gazebo/common/Plugin.hh>
 
@@ -55,4 +55,4 @@ private:
 };
 }  // namespace gazebo_plugins
 
-#endif  // GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_
+//#endif  // GAZEBO_PLUGINS__GAZEBO_ROS_TEMPLATE_HPP_

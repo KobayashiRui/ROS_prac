@@ -18,7 +18,12 @@ public:
   /// Node for ROS communication.
   gazebo_ros::Node::SharedPtr ros_node_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscriber;
+  std_msgs::msg::String message;
+  std::mutex lock_;
   void OnUpdate();
+  //void OnGetsub(const std_msgs::msg::String::UniquePtr _msg);//引数には受け取るメッセージ ポインタでないとエラーがでる!
+  void OnGetsub(const std_msgs::msg::String::SharedPtr _msg);//引数には受け取るメッセージ ポインタでないとエラーがでる!
 
 
 
@@ -35,29 +40,41 @@ GazeboRosTemplate::~GazeboRosTemplate()
 
 void GazeboRosTemplate::Load(gazebo::physics::ModelPtr model, sdf::ElementPtr sdf)
 {
-  // Create a GazeboRos node instead of a common ROS node.
-  // Pass it SDF parameters so common options like namespace and remapping
-  // can be handled.
-  impl_->ros_node_ = gazebo_ros::Node::Get(sdf);
+  //impl_->ros_node_ = gazebo_ros::Node::Get(sdf);
+  //ROS nodeの作成 Get(名前)でネームスペースができ, topic名が/名前/~となる
+  impl_->ros_node_ = gazebo_ros::Node::Get();
+  impl_->message.data = "Hello, world! ";
+
+  //publisherの作成  
   impl_->publisher = impl_->ros_node_->create_publisher<std_msgs::msg::String>("topic",rclcpp::QoS(rclcpp::KeepLast(1)));
+  //上のGetでGet("hoge")となっている場合 => /hoge/topic となる
 
 
-  // The model pointer gives you direct access to the physics object,
-  // for example:
+  impl_->subscriber = impl_->ros_node_->create_subscription<std_msgs::msg::String>(
+    "topic2", rclcpp::QoS(rclcpp::KeepLast(1)),
+    std::bind(&GazeboRosTemplatePrivate::OnGetsub, impl_.get(), std::placeholders::_1));
+
+
+
   RCLCPP_INFO(impl_->ros_node_->get_logger(), model->GetName().c_str());
-  RCLCPP_INFO(impl_->ros_node_->get_logger(), impl_->publisher->get_topic_name());
+  //RCLCPP_INFO(impl_->ros_node_->get_logger(), impl_->publisher->get_topic_name());
 
-  // Create a connection so the OnUpdate function is called at every simulation
-  // iteration. Remove this call, the connection and the callback if not needed.
+  //update_connection_は最後に呼ばないとgazeboの起動が安定しない?
   impl_->update_connection_ = gazebo::event::Events::ConnectWorldUpdateBegin(
     std::bind(&GazeboRosTemplatePrivate::OnUpdate, impl_.get()));
 }
 
+//void GazeboRosTemplatePrivate::OnGetsub(const std_msgs::msg::String::UniquePtr _msg)
+void GazeboRosTemplatePrivate::OnGetsub(const std_msgs::msg::String::SharedPtr _msg)
+{
+  std::lock_guard<std::mutex> scoped_lock(lock_);
+  RCLCPP_INFO(ros_node_->get_logger(), "I heard: '%s'", _msg->data.c_str());
+  message.data=_msg->data;
+}
+
 void GazeboRosTemplatePrivate::OnUpdate()
 {
-  auto message = std_msgs::msg::String();
-  message.data = "Hello, world! ";
-  RCLCPP_INFO(ros_node_->get_logger(), "Publishing: '%s'", message.data.c_str());
+  //RCLCPP_INFO(ros_node_->get_logger(), "Publishing: '%s'", message.data.c_str());
 
   publisher->publish(message);
   // Do something every simulation iteration
