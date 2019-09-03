@@ -3,7 +3,7 @@
   <world name="default">
     <model name="demo_model">
       <static>true</static>
-      <plugin name="gazebo_ros_template" filename="./build/libgazebo_test.so">
+      <plugin name="gazebo_ros_template" filename="./build_test/libgazebo_test.so">
         <ros>
           <namespace>/demo</namespace>
         </ros>

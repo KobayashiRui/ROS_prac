@@ -75,6 +75,8 @@ void GazeboRosTemplatePrivate::OnGetsub(const std_msgs::msg::String::SharedPtr _
 void GazeboRosTemplatePrivate::OnUpdate()
 {
   //RCLCPP_INFO(ros_node_->get_logger(), "Publishing: '%s'", message.data.c_str());
+  RCLCPP_INFO(ros_node_->get_logger(), "Publishing");
+
 
   publisher->publish(message);
   // Do something every simulation iteration

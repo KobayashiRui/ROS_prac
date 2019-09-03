@@ -1,4 +1,4 @@
-# Install script for directory: /home/kr/git/ROS_practice/gazebo_practice/test
+# Install script for directory: /home/kr/DockerData/git/ROS_practice/gazebo_practice/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/kr/git/ROS_practice/gazebo_practice/test/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/kr/DockerData/git/ROS_practice/gazebo_practice/test/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
