@@ -29,7 +29,7 @@ function(ament_cmake_uninstall_target_remove_empty_directories path)
 endfunction()
 
 # uninstall files installed using the standard install() function
-set(install_manifest "/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/build_test/install_manifest.txt")
+set(install_manifest "/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/build/install_manifest.txt")
 if(NOT EXISTS "${install_manifest}")
   message(FATAL_ERROR "Cannot find install manifest: ${install_manifest}")
 endif()

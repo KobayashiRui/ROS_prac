@@ -48,13 +48,24 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub
+CMAKE_SOURCE_DIR = /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/build_test
+CMAKE_BINARY_DIR = /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/build
 
 #=============================================================================
 # Targets provided globally by CMake.
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -78,22 +89,11 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/build_test/CMakeFiles /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/build_test/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/build/CMakeFiles /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/build_test/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -135,44 +135,44 @@ uninstall/fast:
 .PHONY : uninstall/fast
 
 #=============================================================================
-# Target rules for targets named publisher_test
+# Target rules for targets named subscriber_test
 
 # Build rule for target.
-publisher_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 publisher_test
-.PHONY : publisher_test
+subscriber_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 subscriber_test
+.PHONY : subscriber_test
 
 # fast build rule for target.
-publisher_test/fast:
-	$(MAKE) -f CMakeFiles/publisher_test.dir/build.make CMakeFiles/publisher_test.dir/build
-.PHONY : publisher_test/fast
+subscriber_test/fast:
+	$(MAKE) -f CMakeFiles/subscriber_test.dir/build.make CMakeFiles/subscriber_test.dir/build
+.PHONY : subscriber_test/fast
 
-publisher_test.o: publisher_test.cpp.o
+subscriber_test.o: subscriber_test.cpp.o
 
-.PHONY : publisher_test.o
+.PHONY : subscriber_test.o
 
 # target to build an object file
-publisher_test.cpp.o:
-	$(MAKE) -f CMakeFiles/publisher_test.dir/build.make CMakeFiles/publisher_test.dir/publisher_test.cpp.o
-.PHONY : publisher_test.cpp.o
+subscriber_test.cpp.o:
+	$(MAKE) -f CMakeFiles/subscriber_test.dir/build.make CMakeFiles/subscriber_test.dir/subscriber_test.cpp.o
+.PHONY : subscriber_test.cpp.o
 
-publisher_test.i: publisher_test.cpp.i
+subscriber_test.i: subscriber_test.cpp.i
 
-.PHONY : publisher_test.i
+.PHONY : subscriber_test.i
 
 # target to preprocess a source file
-publisher_test.cpp.i:
-	$(MAKE) -f CMakeFiles/publisher_test.dir/build.make CMakeFiles/publisher_test.dir/publisher_test.cpp.i
-.PHONY : publisher_test.cpp.i
+subscriber_test.cpp.i:
+	$(MAKE) -f CMakeFiles/subscriber_test.dir/build.make CMakeFiles/subscriber_test.dir/subscriber_test.cpp.i
+.PHONY : subscriber_test.cpp.i
 
-publisher_test.s: publisher_test.cpp.s
+subscriber_test.s: subscriber_test.cpp.s
 
-.PHONY : publisher_test.s
+.PHONY : subscriber_test.s
 
 # target to generate assembly for a file
-publisher_test.cpp.s:
-	$(MAKE) -f CMakeFiles/publisher_test.dir/build.make CMakeFiles/publisher_test.dir/publisher_test.cpp.s
-.PHONY : publisher_test.cpp.s
+subscriber_test.cpp.s:
+	$(MAKE) -f CMakeFiles/subscriber_test.dir/build.make CMakeFiles/subscriber_test.dir/subscriber_test.cpp.s
+.PHONY : subscriber_test.cpp.s
 
 # Help Target
 help:
@@ -180,14 +180,14 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... uninstall"
-	@echo "... rebuild_cache"
-	@echo "... publisher_test"
-	@echo "... publisher_test.o"
-	@echo "... publisher_test.i"
-	@echo "... publisher_test.s"
+	@echo "... subscriber_test"
+	@echo "... subscriber_test.o"
+	@echo "... subscriber_test.i"
+	@echo "... subscriber_test.s"
 .PHONY : help
 
 

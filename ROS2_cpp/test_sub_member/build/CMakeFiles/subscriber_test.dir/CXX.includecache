@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/publisher_test.cpp
-chrono
+/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/subscriber_test.cpp
+iostream
 -
 memory
 -
 rclcpp/rclcpp.hpp
-/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/rclcpp/rclcpp.hpp
+/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/rclcpp/rclcpp.hpp
 std_msgs/msg/string.hpp
-/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_pub/std_msgs/msg/string.hpp
+/home/kr/DockerData/git/ROS_practice/ROS2_cpp/test_sub_member/std_msgs/msg/string.hpp
 
 /opt/ros/dashing/include/builtin_interfaces/msg/duration.hpp
 builtin_interfaces/msg/duration__struct.hpp
